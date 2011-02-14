@@ -3,7 +3,7 @@ PROJ = vis-o-mex
 Q ?= @
 CC ?= gcc
 
-UNAME := $(shell uname)
+UNAME = $(shell uname)
 
 C_SRC = \
 	aircraft_vis.c \
@@ -29,17 +29,17 @@ C_SRC = \
 
 OBJ = $(C_SRC:.c=.o) 
 
-WARNINGFLAGS ?= -Wall -Wextra -Werror
-DEBUGFLAGS ?= -g -DDEBUG # -pg to generate profiling information
+WARNINGFLAGS = -Wall -Wextra -Werror
+DEBUGFLAGS = -g -DDEBUG # -pg to generate profiling information
 
 INCLUDES = \
 	-I$(MATHLIBPATH) \
 	-I$(LCMPATH) \
 
 ## Run with ATLAS if available; likely uses SSE2/3/4 to do matrix math
-BLAS ?= `bash -c 'if gcc -latlas 2>&1 | grep -q "cannot find -latlas"; then echo \-lgslcblas; else echo \-lcblas \-latlas; fi'`
+BLAS = `bash -c 'if gcc -latlas 2>&1 | grep -q "cannot find -latlas"; then echo \-lgslcblas; else echo \-lcblas \-latlas; fi'`
 
-LDFLAGS ?= -lm -lgsl -lX11 -lglut -lGL -lGLU -llcm $(BLAS)
+LDFLAGS = -lm -lgsl -lX11 -lglut -lGL -lGLU -llcm $(BLAS)
 
 FEATURE_FLAGS =
 
